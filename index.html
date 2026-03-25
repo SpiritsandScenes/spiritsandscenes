@@ -166,159 +166,168 @@ footer a:hover{color:var(--gold-light)}
      Smoke wisps, blood drops, gold glyphs
      ══════════════════════════════════════ -->
 <script>
-window.addEventListener('load', function () {
-  var canvas = document.createElement('canvas');
-  if (!canvas || !canvas.getContext) return;
-  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none';
-  document.body.prepend(canvas);
-  var ctx = canvas.getContext('2d');
-  if (!ctx) return;
+(function () {
+  function initCanvas() {
+    var canvas = document.createElement('canvas');
+    canvas.id = 'bgCanvas';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.zIndex = '0';
+    canvas.style.pointerEvents = 'none';
+    document.body.insertBefore(canvas, document.body.firstChild);
 
-  var W, H;
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
+    var ctx = canvas.getContext('2d');
+    var W = 0, H = 0;
 
-  /* ── Smoke particles ── */
-  function Particle() {
-    this.reset = function () {
-      this.x = Math.random() * W;
-      this.y = H + Math.random() * 200;
-      this.r = 40 + Math.random() * 120;
-      this.vx = (Math.random() - .5) * .35;
-      this.vy = -(0.18 + Math.random() * .28);
-      this.life = 0;
-      this.maxLife = 220 + Math.random() * 180;
-      this.rot = Math.random() * Math.PI * 2;
-      this.rotV = (Math.random() - .5) * .003;
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    /* ── Smoke ── */
+    var particles = [];
+    function makeParticle() {
       var t = Math.random();
-      this.hue = t < .12 ? '139,10,26' : t < .35 ? '80,40,110' : '30,20,35';
-    };
-    this.reset();
-    this.life = Math.random() * this.maxLife;
-  }
-  var particles = [];
-  for (var i = 0; i < 55; i++) particles.push(new Particle());
+      return {
+        x: Math.random() * W,
+        y: H + Math.random() * 200,
+        r: 40 + Math.random() * 120,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: -(0.18 + Math.random() * 0.28),
+        life: Math.random() * 400,
+        maxLife: 220 + Math.random() * 180,
+        rot: Math.random() * Math.PI * 2,
+        rotV: (Math.random() - 0.5) * 0.003,
+        hue: t < 0.12 ? '139,10,26' : t < 0.35 ? '80,40,110' : '30,20,35'
+      };
+    }
+    for (var i = 0; i < 55; i++) particles.push(makeParticle());
 
-  /* ── Blood drops ── */
-  function Drop() { this.reset(); }
-  Drop.prototype.reset = function () {
-    this.x = Math.random() * W;
-    this.y = -20 - Math.random() * 80;
-    this.len = 6 + Math.random() * 18;
-    this.w = 1 + Math.random() * 1.8;
-    this.vy = 1.2 + Math.random() * 2.2;
-    this.alpha = 0;
-    this.fadeIn = true;
-    this.done = false;
-  };
-  var drops = [];
-  for (var j = 0; j < 6; j++) drops.push(new Drop());
+    /* ── Blood drops ── */
+    var drops = [];
+    function makeDrop() {
+      return {
+        x: Math.random() * W,
+        y: -20 - Math.random() * 80,
+        len: 6 + Math.random() * 18,
+        w: 1 + Math.random() * 1.8,
+        vy: 1.2 + Math.random() * 2.2,
+        alpha: 0,
+        fadeIn: true,
+        done: false
+      };
+    }
+    for (var j = 0; j < 6; j++) drops.push(makeDrop());
 
-  /* ── Floating gold glyphs ── */
-  var glyphs = ['?', '✦', '†', '◆'];
-  var clues = [];
-  for (var k = 0; k < 10; k++) {
-    clues.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      g: glyphs[Math.floor(Math.random() * glyphs.length)],
-      vx: (Math.random() - .5) * .12,
-      vy: -(0.06 + Math.random() * .1),
-      alpha: 0,
-      maxA: .05 + Math.random() * .08,
-      size: 10 + Math.random() * 18,
-      life: Math.random() * 300,
-      maxLife: 300 + Math.random() * 200
-    });
-  }
-
-  function drawSmoke(p) {
-    var prog = p.life / p.maxLife;
-    var fade = prog < .15 ? prog / .15 : prog > .7 ? (1 - prog) / .3 : 1;
-    var a = Math.min(fade * .07, .07);
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    var g = ctx.createRadialGradient(0, 0, 0, 0, 0, p.r);
-    g.addColorStop(0, 'rgba(' + p.hue + ',' + a + ')');
-    g.addColorStop(1, 'rgba(' + p.hue + ',0)');
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(0, 0, p.r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-
-    /* Smoke */
-    for (var s = 0; s < particles.length; s++) {
-      var p = particles[s];
-      p.life++;
-      p.x += p.vx + Math.sin(p.life * .018) * .4;
-      p.y += p.vy;
-      p.rot += p.rotV;
-      p.r += .12;
-      drawSmoke(p);
-      if (p.life >= p.maxLife) p.reset();
+    /* ── Glyphs ── */
+    var glyphs = ['?', '+', 'x', '*'];
+    var clues = [];
+    for (var k = 0; k < 10; k++) {
+      clues.push({
+        x: Math.random() * W, y: Math.random() * H,
+        g: glyphs[Math.floor(Math.random() * glyphs.length)],
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: -(0.06 + Math.random() * 0.1),
+        alpha: 0,
+        maxA: 0.05 + Math.random() * 0.08,
+        size: 10 + Math.random() * 18,
+        life: Math.random() * 300,
+        maxLife: 300 + Math.random() * 200
+      });
     }
 
-    /* Drops */
-    for (var d = 0; d < drops.length; d++) {
-      var dr = drops[d];
-      if (dr.done) { dr.reset(); continue; }
-      dr.y += dr.vy;
-      if (dr.fadeIn) { dr.alpha += .04; if (dr.alpha >= .55) dr.fadeIn = false; }
-      else dr.alpha -= .012;
-      if (dr.alpha <= 0) { dr.done = true; continue; }
+    function drawSmoke(p) {
+      var prog = p.life / p.maxLife;
+      var fade = prog < 0.15 ? prog / 0.15 : prog > 0.7 ? (1 - prog) / 0.3 : 1;
+      var a = fade * 0.07;
+      if (a <= 0) return;
       ctx.save();
-      ctx.strokeStyle = 'rgba(139,10,26,' + dr.alpha + ')';
-      ctx.lineWidth = dr.w;
-      ctx.lineCap = 'round';
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      var g = ctx.createRadialGradient(0, 0, 0, 0, 0, p.r);
+      g.addColorStop(0, 'rgba(' + p.hue + ',' + a + ')');
+      g.addColorStop(1, 'rgba(' + p.hue + ',0)');
+      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.moveTo(dr.x, dr.y);
-      ctx.lineTo(dr.x, dr.y + dr.len);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(dr.x, dr.y + dr.len, dr.w * .9, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(139,10,26,' + (dr.alpha * .8) + ')';
+      ctx.arc(0, 0, p.r, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
-      if (dr.y > H + 40) dr.done = true;
     }
 
-    /* Glyphs */
-    for (var c = 0; c < clues.length; c++) {
-      var cl = clues[c];
-      cl.life++;
-      cl.x += cl.vx;
-      cl.y += cl.vy;
-      if (cl.life < 40) cl.alpha = cl.maxA * (cl.life / 40);
-      else if (cl.life > cl.maxLife - 60) cl.alpha = cl.maxA * ((cl.maxLife - cl.life) / 60);
-      else cl.alpha = cl.maxA;
-      ctx.save();
-      ctx.font = cl.size + 'px Georgia';
-      ctx.fillStyle = 'rgba(201,164,60,' + cl.alpha + ')';
-      ctx.fillText(cl.g, cl.x, cl.y);
-      ctx.restore();
-      if (cl.life >= cl.maxLife) {
-        cl.x = Math.random() * W; cl.y = H + 20;
-        cl.life = 0; cl.alpha = 0;
-        cl.g = glyphs[Math.floor(Math.random() * glyphs.length)];
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+
+      for (var s = 0; s < particles.length; s++) {
+        var p = particles[s];
+        p.life++;
+        p.x += p.vx + Math.sin(p.life * 0.018) * 0.4;
+        p.y += p.vy;
+        p.rot += p.rotV;
+        p.r += 0.12;
+        drawSmoke(p);
+        if (p.life >= p.maxLife) particles[s] = makeParticle();
       }
-      if (cl.x < -30) cl.x = W + 10;
-      if (cl.x > W + 30) cl.x = -10;
+
+      for (var d = 0; d < drops.length; d++) {
+        var dr = drops[d];
+        if (dr.done) { drops[d] = makeDrop(); continue; }
+        dr.y += dr.vy;
+        if (dr.fadeIn) { dr.alpha += 0.04; if (dr.alpha >= 0.55) dr.fadeIn = false; }
+        else { dr.alpha -= 0.012; }
+        if (dr.alpha <= 0) { dr.done = true; continue; }
+        ctx.save();
+        ctx.strokeStyle = 'rgba(139,10,26,' + dr.alpha + ')';
+        ctx.lineWidth = dr.w;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(dr.x, dr.y);
+        ctx.lineTo(dr.x, dr.y + dr.len);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(dr.x, dr.y + dr.len, dr.w * 0.9, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(139,10,26,' + (dr.alpha * 0.8) + ')';
+        ctx.fill();
+        ctx.restore();
+        if (dr.y > H + 40) dr.done = true;
+      }
+
+      for (var c = 0; c < clues.length; c++) {
+        var cl = clues[c];
+        cl.life++;
+        cl.x += cl.vx;
+        cl.y += cl.vy;
+        if (cl.life < 40) cl.alpha = cl.maxA * (cl.life / 40);
+        else if (cl.life > cl.maxLife - 60) cl.alpha = cl.maxA * ((cl.maxLife - cl.life) / 60);
+        else cl.alpha = cl.maxA;
+        ctx.save();
+        ctx.font = cl.size + 'px Georgia';
+        ctx.fillStyle = 'rgba(201,164,60,' + cl.alpha + ')';
+        ctx.fillText(cl.g, cl.x, cl.y);
+        ctx.restore();
+        if (cl.life >= cl.maxLife) {
+          clues[c] = { x: Math.random() * W, y: H + 20, g: glyphs[Math.floor(Math.random() * glyphs.length)], vx: (Math.random() - 0.5) * 0.12, vy: -(0.06 + Math.random() * 0.1), alpha: 0, maxA: 0.05 + Math.random() * 0.08, size: 10 + Math.random() * 18, life: 0, maxLife: 300 + Math.random() * 200 };
+        }
+        if (cl.x < -30) cl.x = W + 10;
+        if (cl.x > W + 30) cl.x = -10;
+      }
+
+      requestAnimationFrame(tick);
     }
 
-    requestAnimationFrame(tick);
+    tick();
   }
-  tick();
-});
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCanvas);
+  } else {
+    initCanvas();
+  }
+})();
 </script>
 
 <!-- ══════════════════════════════════════
@@ -338,7 +347,7 @@ window.addEventListener('load', function () {
      HERO
      ══════════════════════════════════════ -->
 <section class="hero" id="home">
-  <p class="hero-eyebrow">Seattle's Premier Mobile Murder Mystery</p>
+  <p class="hero-eyebrow">Utah's Premier Mobile Murder Mystery</p>
   <h1>Spirits <span class="hero-amp">&amp;</span><br>Scenes</h1>
   <div class="hero-divider">
     <div class="hero-divider-line"></div>
@@ -384,7 +393,7 @@ window.addEventListener('load', function () {
           <div class="step-glow"></div>
         </div>
         <h3>We Come to You</h3>
-        <p>Our team arrives at your venue with everything — props, costumes, scripts, and atmosphere.</p>
+        <p>Our team arrives at your venue with everything — props, scripts, decoration and atmosphere.</p>
       </div>
       <div class="step">
         <div class="step-num-wrap">
@@ -483,6 +492,20 @@ window.addEventListener('load', function () {
             <span class="tag">8–20 guests</span>
             <span class="tag">2–3 hrs</span>
             <span class="tag">Brewery favorite</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-card">
+        <div class="theme-card-accent" style="background:linear-gradient(90deg,#7a4a10,#c87820)"></div>
+        <div class="theme-card-inner">
+          <p class="theme-era">Wild West — 1876</p>
+          <h3>Dead Man's Hand</h3>
+          <p>Deadwood, Dakota Territory. Wild Bill Hickok was shot dead last night — and Jack McCall just walked free. Now a second body's been found in the back room of the Gem Saloon. No weapon. No witnesses. Three gold claims sitting in a dead man's desk. In a camp where justice means nothing, the only verdict that matters is the one this room agrees on.</p>
+          <div class="theme-tags">
+            <span class="tag">5–40+ guests</span>
+            <span class="tag">75–120 min</span>
+            <span class="tag">Bar &amp; Brewery favorite</span>
           </div>
         </div>
       </div>
@@ -623,6 +646,7 @@ window.addEventListener('load', function () {
               <option>Hollywood Whodunit</option>
               <option>Victorian Secrets</option>
               <option>Curse of the Crimson Pharaoh</option>
+              <option>Dead Man's Hand (Wild West)</option>
               <option>Custom Theme</option>
               <option>Help me choose!</option>
             </select>
@@ -656,7 +680,7 @@ window.addEventListener('load', function () {
     <a href="mailto:hudsonproductions@outlook.com">hudsonproductions@outlook.com</a>
     <a href="https://instagram.com/spiritsandscenes">@spiritsandscenes</a>
   </div>
-  <p class="copy">© 2025 Spirits &amp; Scenes LLC &nbsp;·&nbsp; Seattle, WA</p>
+  <p class="copy">© 2025 Spirits &amp; Scenes LLC &nbsp;·&nbsp; Layton, UT</p>
 </footer>
 
 </body>
