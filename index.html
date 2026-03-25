@@ -1,171 +1,663 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Spirits & Scenes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Georgia', serif;
-            background-color: #1a0f1f;
-            color: #f5f5f5;
-        }
-        header {
-            padding: 80px 20px;
-            text-align: center;
-            color: #ffd700;
-            background-image: linear-gradient(rgba(26,15,31,0.8), rgba(26,15,31,0.8)), url('hero-banner.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        header h1 {
-            font-size: 4em;
-            margin: 0;
-            font-style: italic;
-            text-shadow: 3px 3px 6px #000;
-        }
-        header p {
-            font-size: 1.5em;
-            margin-top: 15px;
-            font-style: italic;
-        }
-        .cta {
-            margin-top: 30px;
-        }
-        .cta a {
-            background-color: #a67c52;
-            color: #fff;
-            padding: 14px 28px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-        }
-        section {
-            padding: 50px 20px;
-            max-width: 900px;
-            margin: 30px auto;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-        h2 {
-            border-bottom: 2px solid #a67c52;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            color: #ffd700;
-        }
-        ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
-        form {
-            margin-top: 20px;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-top: 5px;
-            background-color: #2c1a2c;
-            border: 1px solid #555;
-            color: #fff;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #a67c52;
-            color: #fff;
-            padding: 12px 24px;
-            border: none;
-            margin-top: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #d4af37;
-        }
-        footer {
-            background-color: #0c0c2c;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-            color: #aaa;
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Spirits & Scenes | Mobile Murder Mystery</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0a0608;
+  --deep:#120b12;
+  --shadow:#1a0f1e;
+  --plum:#2d1a38;
+  --purple:#6b2fa0;
+  --purple-mid:#8b44c0;
+  --purple-light:#b07ad4;
+  --crimson:#8b0a1a;
+  --crimson-mid:#b01428;
+  --crimson-light:#d4203a;
+  --gold:#c9a43c;
+  --gold-light:#e8c84a;
+  --gold-pale:#f0dfa0;
+  --grey:#4a4550;
+  --grey-mid:#6e6878;
+  --grey-light:#b8b2c4;
+  --parchment:#e8e0d0;
+  --parchment-dim:#c4baa8;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--parchment);font-family:'EB Garamond',Georgia,serif;line-height:1.75;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,8,0.96);border-bottom:1px solid rgba(201,164,60,.3);padding:.9rem 2.5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);text-decoration:none;letter-spacing:.05em;text-shadow:0 0 20px rgba(201,164,60,.4)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--grey-light);text-decoration:none;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:linear-gradient(135deg,var(--crimson),var(--crimson-mid));color:var(--gold-pale)!important;padding:.4rem 1.2rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.nav-cta:hover{background:linear-gradient(135deg,var(--crimson-mid),var(--crimson-light))!important}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 5rem;position:relative;z-index:1;background:radial-gradient(ellipse 80% 60% at 50% 40%,#2d0a2a 0%,#150814 40%,var(--void) 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:url('hero-banner.jpg') center/cover no-repeat;opacity:.12;mix-blend-mode:luminosity}
+.hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.06) 3px,rgba(0,0,0,.06) 4px);pointer-events:none}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.5em;text-transform:uppercase;color:var(--crimson-light);margin-bottom:1.75rem;position:relative}
+.hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2.4rem,7vw,5.8rem);line-height:1.05;color:var(--gold);letter-spacing:.03em;position:relative;margin-bottom:.5rem;text-shadow:0 0 60px rgba(201,164,60,.25),0 2px 0 rgba(0,0,0,.8)}
+.hero h1 span{color:var(--parchment)}
+.hero-amp{color:var(--crimson-light);font-style:italic;font-family:'EB Garamond',serif}
+.hero-divider{display:flex;align-items:center;gap:1rem;justify-content:center;margin:1.5rem auto}
+.hero-divider-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.hero-divider-line.r{background:linear-gradient(90deg,var(--gold),transparent)}
+.hero-divider-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
+.hero-sub{font-size:clamp(1.05rem,2.5vw,1.35rem);color:var(--parchment-dim);font-style:italic;margin-bottom:.6rem;position:relative;letter-spacing:.04em}
+.hero-body{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;color:var(--grey-light);margin-bottom:3rem;position:relative;text-transform:uppercase}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-primary{display:inline-block;background:linear-gradient(135deg,var(--crimson) 0%,var(--crimson-mid) 100%);color:var(--gold-pale);text-decoration:none;padding:.85rem 2.4rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--crimson-light);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .25s}
+.btn-primary:hover{background:linear-gradient(135deg,var(--crimson-mid),var(--crimson-light));transform:translateY(-2px)}
+.btn-outline{display:inline-block;background:transparent;color:var(--gold);text-decoration:none;padding:.85rem 2.4rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(201,164,60,.5);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .25s}
+.btn-outline:hover{background:rgba(201,164,60,.08);border-color:var(--gold)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.scroll-word{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.35em;color:var(--grey-mid);text-transform:uppercase}
+.scroll-bar{width:1px;height:45px;background:linear-gradient(to bottom,var(--gold),transparent);animation:drip 2s ease-in-out infinite}
+@keyframes drip{0%,100%{opacity:.3;transform:scaleY(.4);transform-origin:top}50%{opacity:1;transform:scaleY(1);transform-origin:top}}
+
+/* ── SHARED SECTION ── */
+section{padding:6.5rem 2rem;position:relative;z-index:1}
+.container{max-width:1120px;margin:0 auto}
+.s-label{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.45em;text-transform:uppercase;color:var(--crimson-light);margin-bottom:.75rem}
+.s-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.6rem,3.5vw,2.6rem);color:var(--gold);letter-spacing:.02em;margin-bottom:.5rem;text-shadow:0 0 30px rgba(201,164,60,.15)}
+.s-rule{display:flex;align-items:center;gap:.75rem;margin-bottom:2.5rem}
+.s-rule-line{height:1px;width:50px;background:linear-gradient(90deg,var(--gold),transparent)}
+.s-rule-dot{width:4px;height:4px;background:var(--crimson-light);transform:rotate(45deg);flex-shrink:0}
+
+/* ── HOW IT WORKS ── */
+.how{background:linear-gradient(180deg,var(--void) 0%,var(--deep) 50%,var(--void) 100%);border-top:1px solid rgba(107,47,160,.25);border-bottom:1px solid rgba(107,47,160,.25)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0;margin-top:3.5rem;position:relative}
+.steps::before{content:'';position:absolute;top:28px;left:14%;right:14%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,164,60,.3) 20%,rgba(201,164,60,.3) 80%,transparent)}
+.step{text-align:center;padding:0 1.5rem;position:relative}
+.step-num-wrap{position:relative;display:inline-block;margin-bottom:1.5rem}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--plum);border:1px solid var(--purple);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold);margin:0 auto}
+.step-glow{position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(107,47,160,.35)}
+.step h3{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.08em;color:var(--parchment);margin-bottom:.6rem;text-transform:uppercase}
+.step p{color:var(--grey-light);font-size:.95rem;line-height:1.65}
+
+/* ── THEMES ── */
+.themes{background:var(--void)}
+.themes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;margin-top:3.5rem;background:rgba(201,164,60,.12);border:1px solid rgba(201,164,60,.12)}
+.theme-card{background:var(--deep);position:relative;overflow:hidden;transition:background .3s}
+.theme-card:hover{background:var(--shadow)}
+.theme-card-accent{height:3px}
+.theme-card-inner{padding:2rem}
+.theme-era{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--purple-light);margin-bottom:.6rem}
+.theme-card h3{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--gold-light);letter-spacing:.04em;margin-bottom:.85rem}
+.theme-card p{color:var(--grey-light);font-size:.95rem;line-height:1.65;font-style:italic;margin-bottom:1.1rem}
+.theme-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-light);background:rgba(255,255,255,.04);border:1px solid rgba(201,164,60,.2);padding:.25rem .75rem}
+.badge{position:absolute;top:0;right:0;background:linear-gradient(135deg,var(--crimson),var(--crimson-mid));color:var(--gold-pale);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .85rem;clip-path:polygon(0 0,100% 0,100% 100%,8px 100%)}
+.custom-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:260px;border:1px dashed rgba(201,164,60,.25)!important;background:transparent!important}
+.custom-card:hover{background:rgba(201,164,60,.03)!important}
+.custom-plus{font-family:'Cinzel Decorative',serif;font-size:2.5rem;color:var(--purple-light);margin-bottom:.75rem;line-height:1}
+
+/* ── VENUES ── */
+.venues{background:linear-gradient(135deg,var(--deep) 0%,#180d22 50%,var(--deep) 100%);border-top:1px solid rgba(139,10,26,.3);border-bottom:1px solid rgba(139,10,26,.3)}
+.venue-grid{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:3rem}
+.venue-pill{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-pale);background:rgba(107,47,160,.15);border:1px solid rgba(107,47,160,.4);padding:.55rem 1.35rem;transition:all .2s}
+.venue-pill:hover{background:rgba(107,47,160,.3);border-color:var(--purple-mid);color:var(--gold-light)}
+
+/* ── BOOKING ── */
+.booking{background:radial-gradient(ellipse 70% 80% at 70% 50%,#1f0b2a 0%,var(--void) 70%)}
+.booking-inner{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start}
+.booking-info p.body-text{color:var(--grey-light);font-size:1rem;font-style:italic;margin-bottom:1.75rem;line-height:1.8}
+.info-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.1rem;padding-bottom:1.1rem;border-bottom:1px solid rgba(201,164,60,.1)}
+.info-item:last-of-type{border-bottom:none}
+.info-diamond{width:8px;height:8px;background:var(--crimson-light);transform:rotate(45deg);flex-shrink:0;margin-top:.55rem}
+.info-item p{color:var(--grey-light);font-size:.9rem;font-family:'Cinzel',serif;letter-spacing:.05em;line-height:1.6}
+.contact-block{margin-top:2rem;padding:1.25rem 1.5rem;border:1px solid rgba(201,164,60,.2);background:rgba(201,164,60,.04)}
+.contact-block p{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.contact-block a{display:block;color:var(--parchment-dim);font-size:.9rem;text-decoration:none;font-style:italic;margin-bottom:.25rem;transition:color .2s}
+.contact-block a:hover{color:var(--gold-light)}
+
+/* ── FORM ── */
+.booking-form{background:var(--shadow);border:1px solid rgba(107,47,160,.35);padding:2.75rem;position:relative}
+.booking-form::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--crimson),var(--purple),var(--gold))}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.full{grid-column:1/-1}
+.fg{display:flex;flex-direction:column;gap:.45rem}
+.fg label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.fg input,.fg select,.fg textarea{background:rgba(0,0,0,.4);border:1px solid rgba(107,47,160,.4);color:var(--parchment);font-family:'EB Garamond',serif;font-size:1rem;padding:.7rem 1rem;outline:none;transition:border-color .2s,background .2s;width:100%}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(180,160,200,.3);font-style:italic}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:rgba(45,26,56,.4)}
+.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a43c'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-color:rgba(0,0,0,.4)}
+.fg select option{background:#1a0f1e;color:var(--parchment)}
+.fg textarea{resize:vertical;min-height:88px;font-style:italic}
+.btn-submit{width:100%;background:linear-gradient(135deg,var(--crimson) 0%,var(--purple) 100%);color:var(--gold-pale);border:none;padding:1rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:all .25s;margin-top:.6rem;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);border-top:1px solid rgba(201,164,60,.3)}
+.btn-submit:hover{background:linear-gradient(135deg,var(--crimson-mid) 0%,var(--purple-mid) 100%);transform:translateY(-1px)}
+
+/* ── FOOTER ── */
+footer{background:var(--void);border-top:1px solid rgba(201,164,60,.2);padding:4rem 2rem 2.5rem;text-align:center;position:relative;z-index:1}
+.footer-logo{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:var(--gold);letter-spacing:.04em;margin-bottom:.4rem;text-shadow:0 0 30px rgba(201,164,60,.3)}
+.footer-tagline{font-style:italic;color:var(--grey-light);font-size:.95rem;margin-bottom:1.5rem}
+.footer-divider{display:flex;align-items:center;justify-content:center;gap:.75rem;margin:1.5rem auto}
+.footer-divider span{width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.footer-divider span.r{background:linear-gradient(90deg,var(--gold),transparent)}
+.footer-divider i{width:5px;height:5px;background:var(--crimson-light);transform:rotate(45deg)}
+footer a{color:var(--grey-light);text-decoration:none;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.12em;transition:color .2s}
+footer a:hover{color:var(--gold-light)}
+.footer-links{display:flex;gap:2.5rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.copy{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:var(--grey);margin-top:2rem;text-transform:uppercase}
+
+/* ── RESPONSIVE ── */
+@media(max-width:800px){
+  .nav-links{display:none}
+  .booking-inner{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:1}
+  .steps::before{display:none}
+  .btn-outline{display:block;text-align:center;margin-top:.75rem}
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>Spirits & Scenes</h1>
-        <p>Murder, Mystery, and Mayhem — Delivered to Your Doorstep!</p>
-        <div class="cta">
-            #contactBook Your Mystery Night</a>
+
+<!-- ══════════════════════════════════════
+     BACKGROUND CANVAS ANIMATION
+     Smoke wisps, blood drops, gold glyphs
+     ══════════════════════════════════════ -->
+<script>
+window.addEventListener('load', function () {
+  var canvas = document.createElement('canvas');
+  if (!canvas || !canvas.getContext) return;
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none';
+  document.body.prepend(canvas);
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  var W, H;
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ── Smoke particles ── */
+  function Particle() {
+    this.reset = function () {
+      this.x = Math.random() * W;
+      this.y = H + Math.random() * 200;
+      this.r = 40 + Math.random() * 120;
+      this.vx = (Math.random() - .5) * .35;
+      this.vy = -(0.18 + Math.random() * .28);
+      this.life = 0;
+      this.maxLife = 220 + Math.random() * 180;
+      this.rot = Math.random() * Math.PI * 2;
+      this.rotV = (Math.random() - .5) * .003;
+      var t = Math.random();
+      this.hue = t < .12 ? '139,10,26' : t < .35 ? '80,40,110' : '30,20,35';
+    };
+    this.reset();
+    this.life = Math.random() * this.maxLife;
+  }
+  var particles = [];
+  for (var i = 0; i < 55; i++) particles.push(new Particle());
+
+  /* ── Blood drops ── */
+  function Drop() { this.reset(); }
+  Drop.prototype.reset = function () {
+    this.x = Math.random() * W;
+    this.y = -20 - Math.random() * 80;
+    this.len = 6 + Math.random() * 18;
+    this.w = 1 + Math.random() * 1.8;
+    this.vy = 1.2 + Math.random() * 2.2;
+    this.alpha = 0;
+    this.fadeIn = true;
+    this.done = false;
+  };
+  var drops = [];
+  for (var j = 0; j < 6; j++) drops.push(new Drop());
+
+  /* ── Floating gold glyphs ── */
+  var glyphs = ['?', '✦', '†', '◆'];
+  var clues = [];
+  for (var k = 0; k < 10; k++) {
+    clues.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      g: glyphs[Math.floor(Math.random() * glyphs.length)],
+      vx: (Math.random() - .5) * .12,
+      vy: -(0.06 + Math.random() * .1),
+      alpha: 0,
+      maxA: .05 + Math.random() * .08,
+      size: 10 + Math.random() * 18,
+      life: Math.random() * 300,
+      maxLife: 300 + Math.random() * 200
+    });
+  }
+
+  function drawSmoke(p) {
+    var prog = p.life / p.maxLife;
+    var fade = prog < .15 ? prog / .15 : prog > .7 ? (1 - prog) / .3 : 1;
+    var a = Math.min(fade * .07, .07);
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    var g = ctx.createRadialGradient(0, 0, 0, 0, 0, p.r);
+    g.addColorStop(0, 'rgba(' + p.hue + ',' + a + ')');
+    g.addColorStop(1, 'rgba(' + p.hue + ',0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Smoke */
+    for (var s = 0; s < particles.length; s++) {
+      var p = particles[s];
+      p.life++;
+      p.x += p.vx + Math.sin(p.life * .018) * .4;
+      p.y += p.vy;
+      p.rot += p.rotV;
+      p.r += .12;
+      drawSmoke(p);
+      if (p.life >= p.maxLife) p.reset();
+    }
+
+    /* Drops */
+    for (var d = 0; d < drops.length; d++) {
+      var dr = drops[d];
+      if (dr.done) { dr.reset(); continue; }
+      dr.y += dr.vy;
+      if (dr.fadeIn) { dr.alpha += .04; if (dr.alpha >= .55) dr.fadeIn = false; }
+      else dr.alpha -= .012;
+      if (dr.alpha <= 0) { dr.done = true; continue; }
+      ctx.save();
+      ctx.strokeStyle = 'rgba(139,10,26,' + dr.alpha + ')';
+      ctx.lineWidth = dr.w;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(dr.x, dr.y);
+      ctx.lineTo(dr.x, dr.y + dr.len);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(dr.x, dr.y + dr.len, dr.w * .9, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(139,10,26,' + (dr.alpha * .8) + ')';
+      ctx.fill();
+      ctx.restore();
+      if (dr.y > H + 40) dr.done = true;
+    }
+
+    /* Glyphs */
+    for (var c = 0; c < clues.length; c++) {
+      var cl = clues[c];
+      cl.life++;
+      cl.x += cl.vx;
+      cl.y += cl.vy;
+      if (cl.life < 40) cl.alpha = cl.maxA * (cl.life / 40);
+      else if (cl.life > cl.maxLife - 60) cl.alpha = cl.maxA * ((cl.maxLife - cl.life) / 60);
+      else cl.alpha = cl.maxA;
+      ctx.save();
+      ctx.font = cl.size + 'px Georgia';
+      ctx.fillStyle = 'rgba(201,164,60,' + cl.alpha + ')';
+      ctx.fillText(cl.g, cl.x, cl.y);
+      ctx.restore();
+      if (cl.life >= cl.maxLife) {
+        cl.x = Math.random() * W; cl.y = H + 20;
+        cl.life = 0; cl.alpha = 0;
+        cl.g = glyphs[Math.floor(Math.random() * glyphs.length)];
+      }
+      if (cl.x < -30) cl.x = W + 10;
+      if (cl.x > W + 30) cl.x = -10;
+    }
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+});
+</script>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+     ══════════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">Spirits &amp; Scenes</a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#themes">Mysteries</a></li>
+    <li><a href="#venues">Venues</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ -->
+<section class="hero" id="home">
+  <p class="hero-eyebrow">Seattle's Premier Mobile Murder Mystery</p>
+  <h1>Spirits <span class="hero-amp">&amp;</span><br>Scenes</h1>
+  <div class="hero-divider">
+    <div class="hero-divider-line"></div>
+    <div class="hero-divider-diamond"></div>
+    <div class="hero-divider-line r"></div>
+  </div>
+  <p class="hero-sub">Murder, Mystery &amp; Mayhem — Delivered to Your Doorstep</p>
+  <p class="hero-body">We bring the props. You bring the guests. Together, you solve the crime.</p>
+  <div class="hero-btns">
+    <a href="#booking" class="btn-primary">Book Your Mystery Night</a>
+    <a href="#themes" class="btn-outline">Explore Mysteries</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    <span class="scroll-word">Scroll</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     HOW IT WORKS
+     ══════════════════════════════════════ -->
+<section class="how" id="how">
+  <div class="container" style="text-align:center">
+    <p class="s-label">The Experience</p>
+    <h2 class="s-title">How It Works</h2>
+    <div class="s-rule" style="justify-content:center">
+      <div class="s-rule-line"></div>
+      <div class="s-rule-dot"></div>
+      <div class="s-rule-line" style="background:linear-gradient(90deg,transparent,var(--gold))"></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">01</div>
+          <div class="step-glow"></div>
         </div>
-    </header>
- 
-    <section>
-        <h2>About Us</h2>
-        <p>Spirits & Scenes is a mobile murder mystery experience that brings thrilling entertainment to your parties and events. Whether it's a birthday, corporate gathering, or themed celebration, we deliver immersive mystery adventures right to your venue.</p>
-    </section>
+        <h3>Choose Your Mystery</h3>
+        <p>Pick from our curated themes — or let us craft a fully custom experience for your event.</p>
+      </div>
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">02</div>
+          <div class="step-glow"></div>
+        </div>
+        <h3>We Come to You</h3>
+        <p>Our team arrives at your venue with everything — props, costumes, scripts, and atmosphere.</p>
+      </div>
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">03</div>
+          <div class="step-glow"></div>
+        </div>
+        <h3>Solve the Crime</h3>
+        <p>Your guests become suspects and detectives. Work together — or go rogue — to unmask the killer.</p>
+      </div>
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">04</div>
+          <div class="step-glow"></div>
+        </div>
+        <h3>The Reveal</h3>
+        <p>The murderer is unmasked. The night becomes a story you'll retell for years.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section>
-        <h2>How It Works</h2>
-        <ul>
-            <li>Choose a mystery theme</li>
-            <li>We arrive with props, scripts, and atmosphere</li>
-            <li>You and your guests solve the mystery together!</li>
-        </ul>
-    </section>
+<!-- ══════════════════════════════════════
+     MYSTERY THEMES
+     ══════════════════════════════════════ -->
+<section class="themes" id="themes">
+  <div class="container">
+    <p class="s-label">The Cases</p>
+    <h2 class="s-title">Mystery Themes</h2>
+    <div class="s-rule"><div class="s-rule-line"></div><div class="s-rule-dot"></div></div>
+    <div class="themes-grid">
 
-    <section>
-        <h2>Mystery Themes</h2>
-        <ul>
-            <li>1920s Speakeasy</li>
-            <li>Haunted Manor</li>
-            <li>Hollywood Whodunit</li>
-            <li>Victorian Secrets</li>
-            <li>Curse of the Crimson Pharoah</li>
-            <li>Or let us customize one for you!</li>
-        </ul>
-    </section>
+      <div class="theme-card">
+        <div class="theme-card-accent" style="background:linear-gradient(90deg,var(--gold),var(--crimson-light))"></div>
+        <div class="badge">Most Popular</div>
+        <div class="theme-card-inner">
+          <p class="theme-era">1920s Prohibition</p>
+          <h3>The Speakeasy Slaying</h3>
+          <p>The hooch is flowing, the jazz is hot — and someone just turned up dead behind the bar. In a world where everyone has secrets, who pulled the trigger?</p>
+          <div class="theme-tags">
+            <span class="tag">8–20 guests</span>
+            <span class="tag">2–3 hrs</span>
+            <span class="tag">Bar &amp; Pub favorite</span>
+          </div>
+        </div>
+      </div>
 
-    <section id="contact">
-        <h2>Contact / Booking</h2>
-        <form
-  action="https://formspree.io/f/xzzjeqog"
-  method="POST"
->
-<input type="hidden" name="_subject" value="New Booking Inquiry from Spirits & Scenes">
-    <input type="hidden" name="_redirect" value="thank-you.html">
+      <div class="theme-card">
+        <div class="theme-card-accent" style="background:linear-gradient(90deg,var(--purple),var(--purple-light))"></div>
+        <div class="theme-card-inner">
+          <p class="theme-era">Gothic Victorian</p>
+          <h3>Haunted Manor</h3>
+          <p>An invitation to the estate. A storm rolls in. The host is found dead before dinner is served. The doors are locked — and the killer is still inside.</p>
+          <div class="theme-tags">
+            <span class="tag">6–16 guests</span>
+            <span class="tag">2–3 hrs</span>
+            <span class="tag">Birthday favorite</span>
+          </div>
+        </div>
+      </div>
 
-  <label>
-    Name:
-    <input type="text" id="name" name="name" required>
-  </label>
-  <label>
-    Your email:
-    <input type="email" name="email" required>
-  </label>
-  <label>
-    Phone Number:
-    <input type="tel" id="phone" name="phone">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-    Event Date
-    <input type="date" id="date" name="date">
-  </label>
-  <button type="submit">Send</button>
-</form>
-    </section>
+      <div class="theme-card">
+        <div class="theme-card-accent" style="background:linear-gradient(90deg,var(--crimson),var(--gold))"></div>
+        <div class="theme-card-inner">
+          <p class="theme-era">Hollywood Glamour</p>
+          <h3>Hollywood Whodunit</h3>
+          <p>Red carpets, silver screens, and a starlet found dead in her dressing room. Every guest at this premiere has a motive — and a secret to protect.</p>
+          <div class="theme-tags">
+            <span class="tag">8–24 guests</span>
+            <span class="tag">2–3 hrs</span>
+            <span class="tag">Anniversary favorite</span>
+          </div>
+        </div>
+      </div>
 
-    <footer>
-        <p>Contact us: hudsonproductions@outlook.com | Instagram: @spiritsandscenes</p>
-        <p>&copy; 2024 Spirits & Scenes LLC</p>
-    </footer>
+      <div class="theme-card">
+        <div class="theme-card-accent" style="background:linear-gradient(90deg,#1a5a3a,#2d9a6e)"></div>
+        <div class="theme-card-inner">
+          <p class="theme-era">Victorian England</p>
+          <h3>Victorian Secrets</h3>
+          <p>High society. Hushed scandals. A lord found poisoned at his own dinner party. Manners must be kept — even when murder is afoot.</p>
+          <div class="theme-tags">
+            <span class="tag">6–18 guests</span>
+            <span class="tag">2–3 hrs</span>
+            <span class="tag">Corporate events</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-card">
+        <div class="theme-card-accent" style="background:linear-gradient(90deg,#8a6010,var(--gold-light))"></div>
+        <div class="theme-card-inner">
+          <p class="theme-era">Ancient Egypt</p>
+          <h3>Curse of the Crimson Pharaoh</h3>
+          <p>An archaeologist is dead. The tomb is sealed. The ancient curse is real — or was it murder? Decipher the clues before the curse claims its next victim.</p>
+          <div class="theme-tags">
+            <span class="tag">8–20 guests</span>
+            <span class="tag">2–3 hrs</span>
+            <span class="tag">Brewery favorite</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-card custom-card">
+        <div class="theme-card-inner" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+          <p class="custom-plus">✦</p>
+          <p class="theme-era" style="color:var(--gold)">Bespoke Experience</p>
+          <h3 style="color:var(--parchment)">Your Custom Mystery</h3>
+          <p style="max-width:260px">Your venue. Your theme. Your story. We'll craft a fully bespoke experience around your event, brand, or occasion.</p>
+          <a href="#booking" class="btn-primary" style="font-size:.65rem;padding:.6rem 1.6rem;margin-top:1rem">Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     VENUES
+     ══════════════════════════════════════ -->
+<section class="venues" id="venues">
+  <div class="container" style="text-align:center">
+    <p class="s-label">We Come to You</p>
+    <h2 class="s-title">Perfect For Any Venue</h2>
+    <div class="s-rule" style="justify-content:center">
+      <div class="s-rule-line"></div>
+      <div class="s-rule-dot"></div>
+      <div class="s-rule-line" style="background:linear-gradient(90deg,transparent,var(--gold))"></div>
+    </div>
+    <p style="color:var(--grey-light);font-style:italic;max-width:560px;margin:0 auto 3rem;font-size:1rem">No venue is too quirky and no crowd is too rowdy. If you have a space and guests who love a good story, we can make it happen.</p>
+    <div class="venue-grid">
+      <span class="venue-pill">Bars &amp; Pubs</span>
+      <span class="venue-pill">Breweries &amp; Taprooms</span>
+      <span class="venue-pill">Birthday Parties</span>
+      <span class="venue-pill">Anniversary Dinners</span>
+      <span class="venue-pill">Corporate Events</span>
+      <span class="venue-pill">Bachelorette Parties</span>
+      <span class="venue-pill">Private Homes</span>
+      <span class="venue-pill">Wineries</span>
+      <span class="venue-pill">Hotel Events</span>
+      <span class="venue-pill">Escape Room Venues</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BOOKING FORM
+     ══════════════════════════════════════ -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="booking-inner">
+
+      <div class="booking-info">
+        <p class="s-label">Reservations</p>
+        <h2 class="s-title">Book Your Night</h2>
+        <div class="s-rule"><div class="s-rule-line"></div><div class="s-rule-dot"></div></div>
+        <p class="body-text">Ready to bring the mystery to your event? Fill out the form and we'll be in touch within 24 hours to confirm details and availability.</p>
+        <div class="info-item">
+          <div class="info-diamond"></div>
+          <p>We travel to your venue — anywhere in the greater Seattle area</p>
+        </div>
+        <div class="info-item">
+          <div class="info-diamond"></div>
+          <p>Events run 2–3 hours. We recommend booking 2–3 weeks in advance</p>
+        </div>
+        <div class="info-item">
+          <div class="info-diamond"></div>
+          <p>Custom themes available — just mention it in your message</p>
+        </div>
+        <div class="info-item">
+          <div class="info-diamond"></div>
+          <p>All props, scripts, and facilitation are included</p>
+        </div>
+        <div class="contact-block">
+          <p>Direct Contact</p>
+          <a href="mailto:hudsonproductions@outlook.com">hudsonproductions@outlook.com</a>
+          <a href="https://instagram.com/spiritsandscenes">@spiritsandscenes on Instagram</a>
+        </div>
+      </div>
+
+      <!-- FormSubmit.co handles delivery — no backend needed -->
+      <form class="booking-form" action="https://formsubmit.co/hudsonproductions@outlook.com" method="POST">
+        <input type="hidden" name="_next" value="https://spiritsandscenes.github.io/spiritsandscenes/thank-you.html"/>
+        <input type="hidden" name="_subject" value="New Booking Inquiry — Spirits &amp; Scenes"/>
+        <input type="hidden" name="_captcha" value="false"/>
+        <div class="form-grid">
+          <div class="fg">
+            <label>First Name</label>
+            <input type="text" name="first_name" placeholder="Jane" required/>
+          </div>
+          <div class="fg">
+            <label>Last Name</label>
+            <input type="text" name="last_name" placeholder="Doe" required/>
+          </div>
+          <div class="fg">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="jane@example.com" required/>
+          </div>
+          <div class="fg">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="(206) 555-0100"/>
+          </div>
+          <div class="fg">
+            <label>Event Date</label>
+            <input type="date" name="event_date"/>
+          </div>
+          <div class="fg">
+            <label>Guest Count</label>
+            <select name="guest_count">
+              <option value="">Select range</option>
+              <option>Under 8 guests</option>
+              <option>8–12 guests</option>
+              <option>13–20 guests</option>
+              <option>20+ guests</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Event Type</label>
+            <select name="event_type">
+              <option value="">Select type</option>
+              <option>Birthday Party</option>
+              <option>Anniversary</option>
+              <option>Bar / Pub Night</option>
+              <option>Brewery / Taproom</option>
+              <option>Bachelorette Party</option>
+              <option>Corporate Event</option>
+              <option>Private Party</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Preferred Theme</label>
+            <select name="theme">
+              <option value="">Select a mystery</option>
+              <option>The Speakeasy Slaying</option>
+              <option>Haunted Manor</option>
+              <option>Hollywood Whodunit</option>
+              <option>Victorian Secrets</option>
+              <option>Curse of the Crimson Pharaoh</option>
+              <option>Custom Theme</option>
+              <option>Help me choose!</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label>Venue / Location</label>
+            <input type="text" name="venue" placeholder="Name or address of your venue"/>
+          </div>
+          <div class="fg full">
+            <label>Anything else we should know?</label>
+            <textarea name="message" placeholder="Special requests, accessibility needs, custom ideas..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Send Booking Request</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════ -->
+<footer>
+  <p class="footer-logo">Spirits &amp; Scenes</p>
+  <p class="footer-tagline">Murder, Mystery &amp; Mayhem — Delivered to Your Doorstep</p>
+  <div class="footer-divider">
+    <span></span><i></i><span class="r"></span>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:hudsonproductions@outlook.com">hudsonproductions@outlook.com</a>
+    <a href="https://instagram.com/spiritsandscenes">@spiritsandscenes</a>
+  </div>
+  <p class="copy">© 2025 Spirits &amp; Scenes LLC &nbsp;·&nbsp; Seattle, WA</p>
+</footer>
+
 </body>
 </html>
