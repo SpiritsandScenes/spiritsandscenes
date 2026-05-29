@@ -95,6 +95,8 @@ section{padding:6.5rem 2rem;position:relative}
 .theme-card p{color:var(--grey-light);font-size:.95rem;line-height:1.65;font-style:italic;margin-bottom:1.1rem}
 .theme-tags{display:flex;flex-wrap:wrap;gap:.4rem}
 .tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-light);background:rgba(255,255,255,.04);border:1px solid rgba(201,164,60,.2);padding:.25rem .75rem}
+.theme-card-img{width:100%;height:180px;object-fit:cover;object-position:center;display:block;opacity:0.85;transition:opacity .3s}
+.theme-card:hover .theme-card-img{opacity:1}
 .badge{position:absolute;top:0;right:0;background:linear-gradient(135deg,var(--crimson),var(--crimson-mid));color:var(--gold-pale);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .85rem;clip-path:polygon(0 0,100% 0,100% 100%,8px 100%)}
 .custom-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:260px;border:1px dashed rgba(201,164,60,.25)!important;background:transparent!important}
 .custom-card:hover{background:rgba(201,164,60,.03)!important}
@@ -432,6 +434,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 01 Ashwood Manor -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#3c3289,#7a70c0)"></div>
+        <img class="theme-card-img" src="images/Ashwood Manor.png" alt="Ashwood Manor"/>
         <div class="theme-card-inner">
           <p class="theme-era">Yorkshire, England — October 1889</p>
           <h3>Ashwood Manor</h3>
@@ -449,6 +452,7 @@ footer a:hover{color:var(--gold-light)}
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#7a2e08,#c0622a)"></div>
         <div class="badge">Bar Favourite</div>
+        <img class="theme-card-img" src="images/Dead Man's Hand.png" alt="Dead Man's Hand"/>
         <div class="theme-card-inner">
           <p class="theme-era">Deadwood, Dakota Territory — 1876</p>
           <h3>Dead Man's Hand</h3>
@@ -465,6 +469,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 03 Foundry Arms -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#0a5040,#22a080)"></div>
+        <img class="theme-card-img" src="images/Last Orders at the Foundry Arms.png" alt="Last Orders at the Foundry Arms"/>
         <div class="theme-card-inner">
           <p class="theme-era">Birmingham, England — 1923</p>
           <h3>Last Orders at the Foundry Arms</h3>
@@ -481,6 +486,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 04 Curse of the Crimson Pharaoh -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#6b4a08,var(--gold-light))"></div>
+        <img class="theme-card-img" src="images/Curse of the Crimson Pharaoh.png" alt="Curse of the Crimson Pharaoh"/>
         <div class="theme-card-inner">
           <p class="theme-era">Metropolitan Museum Gala — December 1925</p>
           <h3>Curse of the Crimson Pharaoh</h3>
@@ -497,6 +503,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 05 Ugly Sweater -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#1a5030,#3da860)"></div>
+        <img class="theme-card-img" src="images/Ugly Sweater.png" alt="Ugly Sweater"/>
         <div class="theme-card-inner">
           <p class="theme-era">North Star Lodge, Mistlevale — Present Day</p>
           <h3>Ugly Sweater</h3>
@@ -514,6 +521,7 @@ footer a:hover{color:var(--gold-light)}
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#5a1e90,#9a50d0)"></div>
         <div class="badge">Most Popular</div>
+        <img class="theme-card-img" src="images/Murder at the Moonlight Speakeasy.png" alt="Murder at the Moonlight Speakeasy"/>
         <div class="theme-card-inner">
           <p class="theme-era">The Moonlight Speakeasy — 1927</p>
           <h3>Murder at the Moonlight Speakeasy</h3>
@@ -530,6 +538,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 07 Green Beer Bad Blood -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#0c6020,#28b845)"></div>
+        <img class="theme-card-img" src="images/Green Beer Bad Blood.png" alt="Green Beer &amp; Bad Blood"/>
         <div class="theme-card-inner">
           <p class="theme-era">Local Pub — St. Patrick's Day, Present Day</p>
           <h3>Green Beer &amp; Bad Blood</h3>
@@ -546,6 +555,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 08 Valentine's Day Massacre -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,var(--crimson),var(--crimson-light))"></div>
+        <img class="theme-card-img" src="images/Valentines Day Massacre.png" alt="Valentine's Day Massacre"/>
         <div class="theme-card-inner">
           <p class="theme-era">Glamorous Valentine's Soirée — Present Day</p>
           <h3>Valentine's Day Massacre</h3>
@@ -563,6 +573,7 @@ footer a:hover{color:var(--gold-light)}
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#8b1a4a,#d4407a)"></div>
         <div class="badge">Bachelorette</div>
+        <img class="theme-card-img" src="images/Last Vows.png" alt="Last Vows"/>
         <div class="theme-card-inner">
           <p class="theme-era">Rosewood Estate Vineyard, Napa Valley — Present Day</p>
           <h3>Last Vows</h3>
@@ -579,6 +590,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 10 Last Call at the Velvet Coffin -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#2a1a40,#7a50b0)"></div>
+        <img class="theme-card-img" src="images/Last Call at the Velvet Coffin.png" alt="Last Call at the Velvet Coffin"/>
         <div class="theme-card-inner">
           <p class="theme-era">Hargrove &amp; Sons Funeral Parlor, Chicago — 1926</p>
           <h3>Last Call at the Velvet Coffin</h3>
@@ -595,6 +607,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 11 The Last Call (Courtroom) -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#1a2e50,#3060a0)"></div>
+        <img class="theme-card-img" src="images/The Last Call.png" alt="The Last Call"/>
         <div class="theme-card-inner">
           <p class="theme-era">Immersive Courtroom Drama</p>
           <h3>The Last Call</h3>
@@ -611,6 +624,7 @@ footer a:hover{color:var(--gold-light)}
       <!-- 12 The Hollow -->
       <div class="theme-card">
         <div class="theme-card-accent" style="background:linear-gradient(90deg,#0a1a0a,#2a5a2a)"></div>
+        <img class="theme-card-img" src="images/The Hollow.png" alt="The Hollow"/>
         <div class="theme-card-inner">
           <p class="theme-era">Immersive Horror Escape Experience</p>
           <h3>The Hollow</h3>
@@ -693,7 +707,7 @@ footer a:hover{color:var(--gold-light)}
         </div>
         <div class="info-item">
           <div class="info-diamond"></div>
-          <p>All props, scripts, and facilitation are included, decorating for an additional cost</p>
+          <p>All props, scripts, and facilitation are included</p>
         </div>
         <div class="contact-block">
           <p>Direct Contact</p>
