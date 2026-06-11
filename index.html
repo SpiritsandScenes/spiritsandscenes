@@ -150,6 +150,39 @@ footer a:hover{color:var(--gold-light)}
 .footer-links{display:flex;gap:2.5rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
 .copy{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:var(--grey);margin-top:2rem;text-transform:uppercase}
  
+/* ── THE OPENING — FEATURED SPOTLIGHT ── */
+.opening-spotlight{background:linear-gradient(180deg,var(--void) 0%,#0e0614 40%,#0a0810 70%,var(--void) 100%);border-top:1px solid rgba(201,164,60,.2);border-bottom:1px solid rgba(201,164,60,.2);padding:7rem 2rem;position:relative;overflow:hidden}
+.opening-spotlight::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(30,10,40,0.6) 0%,transparent 70%);pointer-events:none}
+.opening-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.opening-img-wrap{position:relative}
+.opening-img-wrap::before{content:'';position:absolute;inset:-1px;background:linear-gradient(135deg,rgba(201,164,60,.3),rgba(139,10,26,.2),rgba(107,47,160,.2));z-index:0}
+.opening-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(10,6,8,0.8),transparent);z-index:2}
+.opening-img{width:100%;display:block;position:relative;z-index:1;opacity:.9;transition:opacity .4s}
+.opening-img-wrap:hover .opening-img{opacity:1}
+.opening-eyebrow{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;display:flex;align-items:center;gap:.75rem}
+.opening-eyebrow::before,.opening-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,164,60,.4))}
+.opening-eyebrow::after{background:linear-gradient(90deg,rgba(201,164,60,.4),transparent)}
+.opening-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);color:var(--gold);letter-spacing:.04em;line-height:1.1;margin-bottom:.5rem;text-shadow:0 0 60px rgba(201,164,60,.2)}
+.opening-sub{font-style:italic;color:var(--parchment-dim);font-size:1.15rem;margin-bottom:.5rem;letter-spacing:.04em}
+.opening-tagline{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;color:var(--crimson-light);text-transform:uppercase;margin-bottom:2rem}
+.opening-body{color:var(--grey-light);font-size:1rem;line-height:1.85;font-style:italic;margin-bottom:1.5rem}
+.opening-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.25rem}
+.opening-pill{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-pale);background:rgba(201,164,60,.08);border:1px solid rgba(201,164,60,.3);padding:.3rem .9rem}
+.opening-btns{display:flex;gap:.85rem;flex-wrap:wrap}
+.btn-seance{display:inline-block;background:linear-gradient(135deg,#3a0a14 0%,var(--crimson) 50%,#4a1060 100%);color:var(--gold-pale);text-decoration:none;padding:.85rem 2.4rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(201,164,60,.4);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .3s;box-shadow:0 0 30px rgba(139,10,26,.2)}
+.btn-seance:hover{background:linear-gradient(135deg,var(--crimson) 0%,#6b1a80 100%);transform:translateY(-2px);box-shadow:0 0 40px rgba(139,10,26,.35)}
+.opening-corner{position:absolute;width:40px;height:40px;border-color:rgba(201,164,60,.35);border-style:solid}
+.opening-corner.tl{top:0;left:0;border-width:1px 0 0 1px}
+.opening-corner.tr{top:0;right:0;border-width:1px 1px 0 0}
+.opening-corner.bl{bottom:0;left:0;border-width:0 0 1px 1px}
+.opening-corner.br{bottom:0;right:0;border-width:0 1px 1px 0}
+.opening-frame{position:relative;padding:2rem}
+
+/* ── THE OPENING — THEMED CARD IN GRID ── */
+.theme-card.opening-card{border:1px solid rgba(201,164,60,.25);background:linear-gradient(180deg,#0e0814 0%,var(--deep) 100%)}
+.theme-card.opening-card:hover{background:linear-gradient(180deg,#140b1c 0%,var(--shadow) 100%)}
+.opening-card-badge{position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,rgba(139,10,26,.8),rgba(107,47,160,.8));color:var(--gold-pale);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:.35rem 1rem;text-align:center}
+
 /* ── RESPONSIVE ── */
 @media(max-width:800px){
   .nav-links{display:none}
@@ -158,6 +191,8 @@ footer a:hover{color:var(--gold-light)}
   .full{grid-column:1}
   .steps::before{display:none}
   .btn-outline{display:block;text-align:center;margin-top:.75rem}
+  .opening-inner{grid-template-columns:1fr}
+  .opening-img-wrap{order:-1}
 }
 </style>
 </head>
@@ -343,6 +378,7 @@ footer a:hover{color:var(--gold-light)}
   <a href="#" class="nav-logo">Spirits &amp; Scenes</a>
   <ul class="nav-links">
     <li><a href="#how">How It Works</a></li>
+    <li><a href="#the-opening">The Opening</a></li>
     <li><a href="#themes">Mysteries</a></li>
     <li><a href="#venues">Venues</a></li>
     <li><a href="#booking" class="nav-cta">Book Now</a></li>
@@ -360,7 +396,7 @@ footer a:hover{color:var(--gold-light)}
     <div class="hero-divider-diamond"></div>
     <div class="hero-divider-line r"></div>
   </div>
-  <p class="hero-sub">Murder, Mystery &amp; Mayhem — Delivered to Your Doorstep</p>
+  <p class="hero-sub">Murder, Mystery &amp; the Unexplained &mdash; Delivered to Your Doorstep</p>
   <p class="hero-body">We bring the props. You bring the guests. Together, you solve the crime.</p>
   <div class="hero-btns">
     <a href="#booking" class="btn-primary">Book Your Mystery Night</a>
@@ -391,7 +427,7 @@ footer a:hover{color:var(--gold-light)}
           <div class="step-glow"></div>
         </div>
         <h3>Choose Your Mystery</h3>
-        <p>Pick from our curated themes — or let us craft a fully custom experience for your event.</p>
+        <p>Pick from our curated mysteries and immersive experiences &mdash; from séance ritual to courtroom drama to psychological horror.</p>
       </div>
       <div class="step">
         <div class="step-num-wrap">
@@ -421,6 +457,49 @@ footer a:hover{color:var(--gold-light)}
   </div>
 </section>
  
+
+<!-- ══════════════════════════════════════
+     THE OPENING — FEATURED SPOTLIGHT
+     ══════════════════════════════════════ -->
+<section class="opening-spotlight" id="the-opening">
+  <div class="container">
+    <div class="opening-inner">
+
+      <div class="opening-frame">
+        <div class="opening-corner tl"></div>
+        <div class="opening-corner tr"></div>
+        <div class="opening-corner bl"></div>
+        <div class="opening-corner br"></div>
+        <div class="opening-img-wrap">
+          <img class="opening-img" src="images/The Opening.png" alt="The Opening — Ashworth Manor Parlor"/>
+        </div>
+      </div>
+
+      <div>
+        <p class="opening-eyebrow">Now Booking &mdash; Signature Live Experience</p>
+        <h2 class="opening-title">The Opening</h2>
+        <p class="opening-sub">An Immersive Victorian S&eacute;ance</p>
+        <p class="opening-tagline">She called her mother. Something else answered.</p>
+        <p class="opening-body">October 1898. Helena Mourne was found dead in the parlor of Ashworth Manor on the night of her wedding. Her husband Silas was blamed. He was ruined. He spent the rest of his life insisting he was innocent &mdash; that what he witnessed in that room was not a murder, but something far stranger.</p>
+        <p class="opening-body">The night before her wedding, Helena had opened a s&eacute;ance circle in that parlor. She was trying to reach her mother. She did not close the circle when she was done.</p>
+        <p class="opening-body" style="color:var(--parchment-dim);font-weight:500">Helena has been in that room ever since. Tonight, in your venue, she finds someone willing to listen.</p>
+        <div class="opening-meta">
+          <span class="opening-pill">Up to 30 guests</span>
+          <span class="opening-pill">~2.5 hours</span>
+          <span class="opening-pill">Three Acts</span>
+          <span class="opening-pill">Victorian Gothic</span>
+          <span class="opening-pill">Bar Service Intervals</span>
+          <span class="opening-pill">Live S&eacute;ance Ritual</span>
+        </div>
+        <div class="opening-btns">
+          <a href="#booking" class="btn-seance">Book The Opening</a>
+          <a href="#themes" class="btn-outline">All Mysteries</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <!-- ══════════════════════════════════════
      MYSTERY THEMES
      ══════════════════════════════════════ -->
@@ -638,6 +717,26 @@ footer a:hover{color:var(--gold-light)}
         </div>
       </div>
 
+
+      <!-- 13 The Opening -->
+      <div class="theme-card opening-card">
+        <div class="opening-card-badge">&#10022; Signature Immersive Experience &mdash; Now Booking</div>
+        <div class="theme-card-accent" style="background:linear-gradient(90deg,var(--crimson),var(--purple),var(--gold))"></div>
+        <img class="theme-card-img" src="images/The Opening.png" alt="The Opening" style="height:220px;object-position:center 30%"/>
+        <div class="theme-card-inner">
+          <p class="theme-era">Ashworth Manor, England &mdash; October 1898</p>
+          <h3>The Opening</h3>
+          <p>Helena Mourne died on her wedding night. Her husband was blamed. He was innocent. She has been in that parlor ever since, waiting for someone to open the circle correctly and finally hear the truth. Tonight, that someone is you.</p>
+          <div class="theme-tags">
+            <span class="tag">Up to 30 guests</span>
+            <span class="tag">~2.5 hours</span>
+            <span class="tag">Live S&eacute;ance</span>
+            <span class="tag">Victorian Gothic</span>
+            <span class="tag">Bar Intervals</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Custom card -->
       <div class="theme-card custom-card">
         <div class="theme-card-inner" style="display:flex;flex-direction:column;align-items:center;text-align:center">
@@ -677,6 +776,9 @@ footer a:hover{color:var(--gold-light)}
       <span class="venue-pill">Wineries</span>
       <span class="venue-pill">Hotel Events</span>
       <span class="venue-pill">Escape Room Venues</span>
+      <span class="venue-pill">Historic Hotels &amp; Inns</span>
+      <span class="venue-pill">Heritage Buildings</span>
+      <span class="venue-pill">Halloween Events</span>
     </div>
   </div>
 </section>
@@ -782,7 +884,9 @@ footer a:hover{color:var(--gold-light)}
               <option>Last Call at the Velvet Coffin (Speakeasy, Chicago 1926)</option>
               <option>The Last Call (Immersive Courtroom)</option>
               <option>The Hollow (Immersive Horror Escape)</option>
+              <option>The Congregation (Extreme Psychological Horror)</option>
               <option>Custom Theme</option>
+              <option>The Opening (Immersive Victorian S&eacute;ance)</option>
               <option>Help me choose!</option>
             </select>
           </div>
@@ -807,7 +911,7 @@ footer a:hover{color:var(--gold-light)}
      ══════════════════════════════════════ -->
 <footer>
   <p class="footer-logo">Spirits &amp; Scenes</p>
-  <p class="footer-tagline">Murder, Mystery &amp; Mayhem — Delivered to Your Doorstep</p>
+  <p class="footer-tagline">Murder, Mystery &amp; the Unexplained &mdash; Delivered to Your Doorstep</p>
   <div class="footer-divider">
     <span></span><i></i><span class="r"></span>
   </div>
