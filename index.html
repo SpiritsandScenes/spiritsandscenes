@@ -101,7 +101,69 @@ section{padding:6.5rem 2rem;position:relative}
 .custom-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:260px;border:1px dashed rgba(201,164,60,.25)!important;background:transparent!important}
 .custom-card:hover{background:rgba(201,164,60,.03)!important}
 .custom-plus{font-family:'Cinzel Decorative',serif;font-size:2.5rem;color:var(--purple-light);margin-bottom:.75rem;line-height:1}
- 
+
+/* ── BREWERY PARTNERS ── */
+.brewery-section{
+  background:linear-gradient(135deg,var(--deep) 0%,#170d20 50%,var(--deep) 100%);
+  border-top:1px solid rgba(201,164,60,.15);
+  border-bottom:1px solid rgba(201,164,60,.15);
+}
+
+.brewery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.5rem;
+  margin-top:3rem;
+}
+
+.brewery-card{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(201,164,60,.15);
+  padding:1.75rem;
+}
+
+.brewery-card h3{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  margin-bottom:.75rem;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.brewery-card p{
+  color:var(--grey-light);
+  line-height:1.7;
+}
+
+.testimonial-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;
+  margin-top:3rem;
+}
+
+.testimonial{
+  background:rgba(201,164,60,.03);
+  border:1px solid rgba(201,164,60,.15);
+  padding:1.5rem;
+}
+
+.testimonial p{
+  color:var(--parchment-dim);
+  font-style:italic;
+}
+
+.testimonial span{
+  display:block;
+  margin-top:1rem;
+  color:var(--gold);
+  font-family:'Cinzel',serif;
+  font-size:.7rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+} 
+
 /* ── VENUES ── */
 .venues{background:linear-gradient(135deg,var(--deep) 0%,#180d22 50%,var(--deep) 100%);border-top:1px solid rgba(139,10,26,.3);border-bottom:1px solid rgba(139,10,26,.3)}
 .venue-grid{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:3rem}
@@ -397,7 +459,9 @@ footer a:hover{color:var(--gold-light)}
     <div class="hero-divider-line r"></div>
   </div>
   <p class="hero-sub">Murder, Mystery &amp; the Unexplained &mdash; Delivered to Your Doorstep</p>
-  <p class="hero-body">We bring the props. You bring the guests. Together, you solve the crime.</p>
+  <p class="hero-body">
+Interactive murder mystery events for breweries, bars, private parties, and corporate gatherings across Utah.
+</p>
   <div class="hero-btns">
     <a href="#booking" class="btn-primary">Book Your Mystery Night</a>
     <a href="#themes" class="btn-outline">Explore Mysteries</a>
@@ -456,7 +520,82 @@ footer a:hover{color:var(--gold-light)}
     </div>
   </div>
 </section>
- 
+
+<section class="brewery-section">
+  <div class="container" style="text-align:center">
+
+    <p class="s-label">For Breweries & Venues</p>
+    <h2 class="s-title">Turn a Slow Night Into an Event</h2>
+
+    <div class="s-rule" style="justify-content:center">
+      <div class="s-rule-line"></div>
+      <div class="s-rule-dot"></div>
+      <div class="s-rule-line" style="background:linear-gradient(90deg,transparent,var(--gold))"></div>
+    </div>
+
+    <p style="max-width:760px;margin:0 auto;color:var(--grey-light);font-size:1.05rem;font-style:italic;">
+      Spirits & Scenes was built specifically for breweries, taprooms, bars, and social events looking for unique entertainment that keeps guests engaged, encourages longer visits, and creates memorable experiences people talk about long after the night ends.
+    </p>
+
+    <div class="brewery-grid">
+
+      <div class="brewery-card">
+        <h3>Increase Guest Engagement</h3>
+        <p>
+          Guests become detectives, suspects, and witnesses. The interactive format keeps people involved throughout the evening.
+        </p>
+      </div>
+
+      <div class="brewery-card">
+        <h3>Encourage Longer Visits</h3>
+        <p>
+          Mystery events naturally keep guests in the venue for extended periods, creating more opportunities for food and beverage sales.
+        </p>
+      </div>
+
+      <div class="brewery-card">
+        <h3>Minimal Staff Involvement</h3>
+        <p>
+          We handle the hosting, materials, facilitation, and gameplay so your team can focus on serving guests.
+        </p>
+      </div>
+
+      <div class="brewery-card">
+        <h3>New Themes Year Round</h3>
+        <p>
+          Holiday events, Victorian mysteries, speakeasies, courtroom dramas, supernatural investigations, and custom experiences.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="testimonial-row">
+
+      <div class="testimonial">
+        <p>
+          "Perfect for breweries, taprooms, bars, corporate events, private parties, and special occasions."
+        </p>
+        <span>Mobile Entertainment</span>
+      </div>
+
+      <div class="testimonial">
+        <p>
+          "Hosted on-site with all materials provided. Guests simply show up, grab a drink, and start investigating."
+        </p>
+        <span>Full-Service Experience</span>
+      </div>
+
+      <div class="testimonial">
+        <p>
+          "Events available throughout Utah. Custom themes and recurring venue partnerships available."
+        </p>
+        <span>Utah Based</span>
+      </div>
+
+    </div>
+
+  </div>
+</section> 
 
 <!-- ══════════════════════════════════════
      THE OPENING — FEATURED SPOTLIGHT
@@ -795,6 +934,9 @@ footer a:hover{color:var(--gold-light)}
         <h2 class="s-title">Book Your Night</h2>
         <div class="s-rule"><div class="s-rule-line"></div><div class="s-rule-dot"></div></div>
         <p class="body-text">Ready to bring the mystery to your event? Fill out the form and we'll be in touch within 24 hours to confirm details and availability.</p>
+        <p style="color:var(--gold);font-family:'Cinzel',serif;letter-spacing:.1em;margin-bottom:1.5rem;">
+           Events Starting at $250
+        </p>
         <div class="info-item">
           <div class="info-diamond"></div>
           <p>We travel to your venue</p>
